@@ -1,7 +1,7 @@
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { NextPage } from "next";
 import React from "react";
-import { NewsList } from "@components";
+import { NewsArticleList } from "@components";
 import { fetchNews } from "../hooks";
 
 export async function getStaticProps() {
@@ -19,7 +19,7 @@ export async function getStaticProps() {
 const Main: NextPage = () => {
   return (
     <div>
-      <NewsList></NewsList>
+      <NewsArticleList></NewsArticleList>
     </div>
   );
 };

@@ -3,37 +3,52 @@ import { Link } from "@toolkit";
 
 interface LinkCategoryProps {
   categoryType: string;
+  className?: string;
 }
 
-const LinkCategory = ({ categoryType }: LinkCategoryProps) => {
+const LinkCategory = ({ categoryType, className }: LinkCategoryProps) => {
   let component = null;
-
-  console.log(categoryType);
 
   switch (categoryType) {
     case CategoryType.EVEOnline:
       component = (
-        <Link text="EVE Online" href={`/filter=${CategoryType.EVEOnline}`} />
+        <Link
+          className={className}
+          text="EVE Online"
+          href={{ pathname: "/", query: { filter: CategoryType.EVEOnline } }}
+        />
       );
       break;
     case CategoryType.XUniverse:
       component = (
-        <Link text="X Universe" href={`/filter=${CategoryType.XUniverse}`} />
+        <Link
+          className={className}
+          text="X Universe"
+          href={{ pathname: "/", query: { filter: CategoryType.XUniverse } }}
+        />
       );
       break;
     case CategoryType.StarpointGemini:
       component = (
         <Link
+          className={className}
           text="Starpoint Gemini"
-          href={`/filter=${CategoryType.StarpointGemini}`}
+          href={{
+            pathname: "/",
+            query: { filter: CategoryType.StarpointGemini },
+          }}
         />
       );
       break;
     case CategoryType.EliteDangerous:
       component = (
         <Link
+          className={className}
           text="Elite: Dangerous"
-          href={`/filter=${CategoryType.EliteDangerous}`}
+          href={{
+            pathname: "/",
+            query: { filter: CategoryType.EliteDangerous },
+          }}
         />
       );
       break;

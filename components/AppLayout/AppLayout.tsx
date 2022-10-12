@@ -1,7 +1,15 @@
+import { styled } from "@stitches/react";
 import Head from "next/head";
 import React from "react";
 import { PropsWithChildren } from "react";
 import { Navbar } from "../Navbar";
+
+const LayoutContainer = styled("main", {
+  display: "flex",
+  padding: "2rem",
+  marginTop: "4rem",
+  justifyContent: "center",
+});
 
 const AppLayout = ({ children }: PropsWithChildren<unknown>) => {
   return (
@@ -9,10 +17,8 @@ const AppLayout = ({ children }: PropsWithChildren<unknown>) => {
       <Head>
         <title>Alpa Orbital News</title>
       </Head>
-      <main>
-        <Navbar />
-        {children}
-      </main>
+      <Navbar />
+      <LayoutContainer>{children}</LayoutContainer>
     </>
   );
 };

@@ -11,7 +11,7 @@ a {
   text-decoration: none;
 }
 
-p {
+p, h4 {
   margin: 0;
 }
 
@@ -25,6 +25,6 @@ p {
   }
   body {
     color: white;
-    background: black;
+    background: rgb(31, 30, 30);
   }
 }

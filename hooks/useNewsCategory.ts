@@ -12,13 +12,13 @@ const getNewsCategories = (data: NewsArticle[]) => {
 };
 
 const useNewsCategories = () => {
-  const { data: newsArticles } = useNews();
+  const { data: newsArticles, isLoading } = useNews();
 
   return useQuery<string[], Error>(
     ["newsCategories"],
     () => getNewsCategories(newsArticles!),
     {
-      enabled: !!newsArticles,
+      enabled: !isLoading,
     }
   );
 };

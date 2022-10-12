@@ -1,2 +1,2 @@
-export * from "./useNews";
-export * from "./useNewsCategory";
+export * from "./useNewsArticle";
+export * from "./useNewsArticleCategory";

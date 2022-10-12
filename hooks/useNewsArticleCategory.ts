@@ -1,6 +1,6 @@
 import { NewsArticle } from "@dto";
 import { useQuery } from "@tanstack/react-query";
-import { useNews } from "./useNews";
+import { useNewsArticle } from "./useNewsArticle";
 
 const getNewsCategories = (data: NewsArticle[]) => {
   return data.reduce<string[]>((categoryList, article) => {
@@ -11,8 +11,8 @@ const getNewsCategories = (data: NewsArticle[]) => {
   }, []);
 };
 
-const useNewsCategories = () => {
-  const { data: newsArticles, isLoading } = useNews();
+const useNewsArticleCategory = () => {
+  const { data: newsArticles, isLoading } = useNewsArticle();
 
   return useQuery<string[], Error>(
     ["newsCategories"],
@@ -23,4 +23,4 @@ const useNewsCategories = () => {
   );
 };
 
-export { useNewsCategories, getNewsCategories };
+export { useNewsArticleCategory, getNewsCategories };

@@ -1,13 +1,16 @@
 import { QueryClient, dehydrate } from "@tanstack/react-query";
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticProps } from "next";
 import React from "react";
-import { NewsArticleList } from "@components";
-import { fetchNews } from "../hooks";
+import { AppLayout, NewsArticleList } from "@components";
+import { fetchNewsArticles } from "../hooks";
 import { NewsArticle } from "../dto/NewsArticle";
+import { NextPageWithLayout } from "./NextPageWithLayout";
+import { useRouter } from "next/router";
+import { CategoryType } from "@utils";
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery<NewsArticle>(["news"], fetchNews);
+  await queryClient.prefetchQuery<NewsArticle>(["news"], fetchNewsArticles);
 
   return {
     props: {
@@ -16,12 +19,22 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Main: NextPage = () => {
+const Main: NextPageWithLayout = () => {
+  const router = useRouter();
+  const { filter, query } = router.query;
+
   return (
-    <div>
-      <NewsArticleList></NewsArticleList>
-    </div>
+    <>
+      <NewsArticleList
+        query={query as string | undefined}
+        categoryType={filter as CategoryType | undefined}
+      ></NewsArticleList>
+    </>
   );
+};
+
+Main.getLayout = (page) => {
+  return <AppLayout>{page}</AppLayout>;
 };
 
 export default Main;

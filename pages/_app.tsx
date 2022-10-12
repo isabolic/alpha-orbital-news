@@ -1,4 +1,4 @@
-import React, { lazy, useRef } from "react";
+import React, { lazy, ReactElement, ReactNode, useRef } from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { AppLayout } from "../components";
@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-query";
 import type { DehydratedState } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { AppPropsWithLayout } from "./AppPropsWithLayout";
 
 const ReactQueryDevtoolsProduction = lazy(() =>
   import("@tanstack/react-query-devtools/build/lib/index.prod.js").then(
@@ -21,7 +22,7 @@ const ReactQueryDevtoolsProduction = lazy(() =>
 const MyApp = ({
   Component,
   pageProps,
-}: AppProps<{ dehydratedState: DehydratedState }>) => {
+}: AppPropsWithLayout<{ dehydratedState: DehydratedState }>) => {
   const [showDevtools, setShowDevtools] = React.useState(false);
 
   React.useEffect(() => {
@@ -31,12 +32,12 @@ const MyApp = ({
 
   const [queryClient] = React.useState(() => new QueryClient());
 
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <AppLayout>
-          <Component {...pageProps} />
-        </AppLayout>
+        {getLayout(<Component {...pageProps} />)}
         <ReactQueryDevtools initialIsOpen />
         {showDevtools && (
           <React.Suspense fallback={null}>

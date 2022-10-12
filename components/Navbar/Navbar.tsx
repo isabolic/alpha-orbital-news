@@ -1,4 +1,4 @@
-import { useNewsCategories } from "@hooks";
+import { useNewsArticleCategory } from "@hooks";
 import { css, styled } from "@stitches/react";
 import { Link } from "@toolkit";
 import { useRouter } from "next/router";
@@ -18,13 +18,13 @@ const NavBar = styled("section", {
 });
 
 const activeClass = css({
-  color: "#4facf9",
   textDecoration: "underline",
   textUnderlineOffset: "3px",
+  color: "#4facf9",
 });
 
 const Navbar = () => {
-  const { data, isLoading } = useNewsCategories();
+  const { data, isLoading } = useNewsArticleCategory();
   const router = useRouter();
   const { filter } = router.query;
 

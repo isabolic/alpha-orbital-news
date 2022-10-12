@@ -1,5 +1,6 @@
 import { styled } from "@stitches/react";
 import NLink from "next/link";
+import { UrlObject } from "url";
 
 const Anchor = styled("a", {
   fontSize: "13px",
@@ -7,14 +8,15 @@ const Anchor = styled("a", {
 });
 
 interface LinkProps {
-  href: string;
+  href: string | UrlObject;
   text: string;
+  className?: string;
 }
 
-const Link = ({ href, text }: LinkProps) => {
+const Link = ({ href, text, className }: LinkProps) => {
   return (
     <NLink href={href} passHref>
-      <Anchor>{text}</Anchor>
+      <Anchor className={className}>{text}</Anchor>
     </NLink>
   );
 };

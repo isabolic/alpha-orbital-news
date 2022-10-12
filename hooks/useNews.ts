@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import type { NewsArticle } from "@dto";
+import { CategoryType } from "../utils/categoryType";
 
 const fetchNews = async () => {
   const response = await fetch(
@@ -9,8 +10,14 @@ const fetchNews = async () => {
   return newsArticle;
 };
 
-const useNews = () => {
-  return useQuery<NewsArticle[], Error>(["news"], () => fetchNews());
+const useNews = (categoryType?: CategoryType) => {
+  return useQuery<NewsArticle[], Error>(["news"], () => fetchNews(), {
+    select: (data) => {
+      return data.filter((rec) =>
+        categoryType ? rec.post_category_id === categoryType : true
+      );
+    },
+  });
 };
 
 export { useNews, fetchNews };

@@ -10,13 +10,14 @@ const fetchNews = async () => {
   return newsArticle;
 };
 
-const useNews = (categoryType?: CategoryType) => {
-  return useQuery<NewsArticle[], Error>(["news"], () => fetchNews(), {
+const useNews = (categoryType?: CategoryType, refetch?: boolean) => {
+  return useQuery<NewsArticle[], Error>(["news"], fetchNews, {
     select: (data) => {
       return data.filter((rec) =>
         categoryType ? rec.post_category_id === categoryType : true
       );
     },
+    enabled: !!refetch,
   });
 };
 

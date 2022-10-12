@@ -1,5 +1,6 @@
 import { CategoryType } from "@utils";
 import { Link } from "@toolkit";
+import { useRouter } from "next/router";
 
 interface LinkCategoryProps {
   categoryType: string;
@@ -8,6 +9,7 @@ interface LinkCategoryProps {
 
 const LinkCategory = ({ categoryType, className }: LinkCategoryProps) => {
   let component = null;
+  const router = useRouter();
 
   switch (categoryType) {
     case CategoryType.EVEOnline:
@@ -15,7 +17,10 @@ const LinkCategory = ({ categoryType, className }: LinkCategoryProps) => {
         <Link
           className={className}
           text="EVE Online"
-          href={{ pathname: "/", query: { filter: CategoryType.EVEOnline } }}
+          href={{
+            pathname: "/",
+            query: { ...router.query, filter: CategoryType.EVEOnline },
+          }}
         />
       );
       break;
@@ -24,7 +29,10 @@ const LinkCategory = ({ categoryType, className }: LinkCategoryProps) => {
         <Link
           className={className}
           text="X Universe"
-          href={{ pathname: "/", query: { filter: CategoryType.XUniverse } }}
+          href={{
+            pathname: "/",
+            query: { ...router.query, filter: CategoryType.XUniverse },
+          }}
         />
       );
       break;
@@ -35,7 +43,7 @@ const LinkCategory = ({ categoryType, className }: LinkCategoryProps) => {
           text="Starpoint Gemini"
           href={{
             pathname: "/",
-            query: { filter: CategoryType.StarpointGemini },
+            query: { ...router.query, filter: CategoryType.StarpointGemini },
           }}
         />
       );
@@ -47,7 +55,7 @@ const LinkCategory = ({ categoryType, className }: LinkCategoryProps) => {
           text="Elite: Dangerous"
           href={{
             pathname: "/",
-            query: { filter: CategoryType.EliteDangerous },
+            query: { ...router.query, filter: CategoryType.EliteDangerous },
           }}
         />
       );

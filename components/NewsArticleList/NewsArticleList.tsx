@@ -1,27 +1,40 @@
-import { useNews } from "@hooks";
-import { useRouter } from "next/router";
+import { useNewsArticle } from "@hooks";
+import { styled } from "@stitches/react";
 import { CategoryType } from "@utils";
 import { NewsArticleCard } from "./NewsArticleCard";
+import { NewsSearchBar } from "./NewsSearchBar";
 
-const NewsArticleList = () => {
-  const router = useRouter();
-  const { filter } = router.query;
-  const { data, isLoading } = useNews(filter as CategoryType | undefined);
+const Section = styled("section", {
+  width: "50%",
+});
+
+interface NewsArticleListProps {
+  categoryType?: CategoryType;
+  query?: string;
+}
+
+const NewsArticleList = ({ categoryType, query }: NewsArticleListProps) => {
+  const { data, isLoading } = useNewsArticle({
+    categoryType,
+    query,
+  });
 
   if (isLoading) return <div>Loading</div>;
 
   return (
-    <section>
+    <Section>
+      <NewsSearchBar value={query} />
       {data?.map((article, idx) => (
         <NewsArticleCard
           key={idx}
           thumbnail={article.post_thumbnail}
           date={article.date}
+          slug={article.slug}
           title={article.title}
           excerpt={article.excerpt}
         />
       ))}
-    </section>
+    </Section>
   );
 };
 

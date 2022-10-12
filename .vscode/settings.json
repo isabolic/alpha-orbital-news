@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true
+  },
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true
+  },
+  "[tsx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true
+  }
+}

@@ -1,13 +1,12 @@
 import { styled } from "@stitches/react";
 
 const Button = styled("button", {
-  backgroundColor: "gainsboro",
-  borderRadius: "9999px",
+  backgroundColor: "#4facf9",
   fontSize: "13px",
   padding: "10px 15px",
-  "&:hover": {
-    backgroundColor: "lightgray",
-  },
+  cursor: "pointer",
+  border: "1px solid transparent",
+  borderRadius: "3px",
 });
 
 export { Button };

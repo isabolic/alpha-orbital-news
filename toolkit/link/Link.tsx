@@ -11,12 +11,15 @@ interface LinkProps {
   href: string | UrlObject;
   text: string;
   className?: string;
+  target?: string;
 }
 
-const Link = ({ href, text, className }: LinkProps) => {
+const Link = ({ href, text, className, target }: LinkProps) => {
   return (
     <NLink href={href} passHref>
-      <Anchor className={className}>{text}</Anchor>
+      <Anchor target={target} className={className}>
+        {text}
+      </Anchor>
     </NLink>
   );
 };

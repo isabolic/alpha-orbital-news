@@ -3,7 +3,6 @@ import { PropsWithChildren } from "react";
 
 const Container = styled("div", {
   fontSize: "13px",
-  padding: "0 1.2rem",
 });
 
 interface ParagraphContainerProps {

@@ -1,5 +1,5 @@
 import { css, styled } from "@stitches/react";
-import { ThumbnailContainer, ParagraphContainer } from "@toolkit";
+import { ThumbnailContainer, ParagraphContainer, Link } from "@toolkit";
 import Image from "next/image";
 
 const Card = styled("div", {
@@ -7,16 +7,28 @@ const Card = styled("div", {
   padding: "1rem",
   marginBottom: "2rem",
   justifyContent: "center",
+  backgroundColor: "black",
 });
 
-const paragraphClass = css({
+const box = css({
+  display: "flex",
   maxWidth: "50%",
+  padding: "0 1.2rem",
+  flexDirection: "column",
+  justifyContent: "space-between",
+});
+
+const link = css({
+  color: "#4facf9",
+  padding: "1rem",
+  display: "flex",
 });
 
 interface NewsArticleCardProps {
   thumbnail: string;
   date: string;
   title: string;
+  slug: string;
   excerpt: string;
 }
 
@@ -25,6 +37,7 @@ const NewsArticleCard = ({
   title,
   date,
   excerpt,
+  slug,
 }: NewsArticleCardProps) => {
   return (
     <Card>
@@ -35,10 +48,18 @@ const NewsArticleCard = ({
           src={`https://www.alpha-orbital.com/assets/images/post_img/${thumbnail}`}
         />
       </ThumbnailContainer>
-      <ParagraphContainer
-        className={paragraphClass()}
-        dangerouslySetInnerHTML={excerpt}
-      ></ParagraphContainer>
+      <div className={box()}>
+        <h4>{title}</h4>
+        <ParagraphContainer
+          dangerouslySetInnerHTML={excerpt}
+        ></ParagraphContainer>
+        <Link
+          className={link()}
+          text="Full article"
+          target="_blank"
+          href={`https://www.alpha-orbital.com/news/${slug}`}
+        />
+      </div>
     </Card>
   );
 };

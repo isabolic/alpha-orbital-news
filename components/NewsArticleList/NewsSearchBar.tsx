@@ -1,7 +1,7 @@
 import { css } from "@stitches/react";
 import { Button, Input } from "@toolkit";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const input = css({
   color: "black",
@@ -29,19 +29,21 @@ interface NewsSearchBarProps {
 
 const NewsSearchBar = ({ value }: NewsSearchBarProps) => {
   const router = useRouter();
-  const [query, setQuery] = useState(value);
+  const [query, setQuery] = useState("");
 
   const onClick = () => {
     router.push({ query: { ...router.query, query } });
   };
 
+  useEffect(() => setQuery(value ?? ""), [value]);
+
+  const onChange = (e) => {
+    setQuery(e.target.value);
+  };
+
   return (
     <div className={box()}>
-      <Input
-        value={value}
-        onChange={(e) => setQuery(e.target.value)}
-        className={input()}
-      ></Input>
+      <Input value={query} onChange={onChange} className={input()} />
       <Button onClick={onClick} className={searchBtn()}>
         Search
       </Button>

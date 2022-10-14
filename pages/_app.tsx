@@ -1,7 +1,5 @@
-import React, { lazy, ReactElement, ReactNode, useRef } from "react";
+import React, { lazy } from "react";
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import { AppLayout } from "../components";
 import {
   Hydrate,
   QueryClient,
@@ -23,13 +21,6 @@ const MyApp = ({
   Component,
   pageProps,
 }: AppPropsWithLayout<{ dehydratedState: DehydratedState }>) => {
-  const [showDevtools, setShowDevtools] = React.useState(false);
-
-  React.useEffect(() => {
-    // @ts-ignore
-    window.toggleDevtools = () => setShowDevtools((old) => !old);
-  }, []);
-
   const [queryClient] = React.useState(() => new QueryClient());
 
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -39,11 +30,6 @@ const MyApp = ({
       <Hydrate state={pageProps.dehydratedState}>
         {getLayout(<Component {...pageProps} />)}
         <ReactQueryDevtools initialIsOpen />
-        {showDevtools && (
-          <React.Suspense fallback={null}>
-            <ReactQueryDevtoolsProduction />
-          </React.Suspense>
-        )}
       </Hydrate>
     </QueryClientProvider>
   );

@@ -1,3 +1,3 @@
 export * from "./AppLayout";
-export * from "./NewsArticleList";
+export * from "./NewsArticleContainer";
 export * from "./Navbar";

@@ -20,7 +20,8 @@
       "@components": ["./components/index.ts"],
       "@dto": ["./dto/index.ts"],
       "@pages": ["./pages/index.ts"],
-      "@utils": ["./utils/index.ts"]
+      "@utils": ["./utils/index.ts"],
+      "@data": ["./data/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

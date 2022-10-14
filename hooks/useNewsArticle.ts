@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import type { NewsArticle } from "@dto";
+import type { NewsArticle, NewsArticleData } from "@dto";
 import { CategoryType } from "../utils/categoryType";
 
-const fetchNewsArticles = async () => {
-  const response = await fetch(
-    "https://www.alpha-orbital.com/last-100-news.json"
-  );
-  return await response.json();
+const fetchNewsArticles = async (): Promise<NewsArticleData> => {
+  const response = await fetch("/api/news");
+  const data = (await response.json()) as NewsArticle[];
+  return {
+    articles: data,
+    total: data.length,
+  };
 };
 
 interface params {
@@ -17,19 +19,18 @@ interface params {
 
 const useNewsArticle = (params?: params) => {
   const { categoryType, query, refetch } = params ?? {};
-  return useQuery<NewsArticle[], Error>(["news"], fetchNewsArticles, {
-    select: (data) => {
-      let articles = data.filter((rec) =>
+  return useQuery<NewsArticleData, Error>(["news"], fetchNewsArticles, {
+    select: ({ articles }: NewsArticleData) => {
+      let list = articles.filter((rec) =>
         categoryType ? rec.post_category_id === categoryType : true
       );
 
-      articles = articles.filter((rec) =>
-        query ? rec.title.includes(query) : true
+      list = list.filter((rec) =>
+        query ? rec.title.toUpperCase().includes(query.toUpperCase()) : true
       );
 
-      return articles;
+      return { articles: list, total: articles.length };
     },
-    enabled: !!refetch,
   });
 };
 

@@ -10,7 +10,7 @@ import { CategoryType } from "@utils";
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery<NewsArticle>(["news"], fetchNewsArticles);
+  await queryClient.prefetchQuery<NewsArticle[]>(["news"], fetchNewsArticles);
 
   return {
     props: {

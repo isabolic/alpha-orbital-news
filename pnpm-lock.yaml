@@ -4,11 +4,14 @@ specifiers:
   '@stitches/react': ^1.2.8
   '@tanstack/react-query': ^4.10.3
   '@tanstack/react-query-devtools': ^4.11.0
+  '@types/memory-cache': ^0.2.2
   '@types/node': 18.8.4
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
+  date-fns: ^2.29.3
   eslint: 8.25.0
   eslint-config-next: 12.3.1
+  memory-cache: ^0.2.0
   next: 12.3.1
   react: 18.2.0
   react-dom: 18.2.0
@@ -18,11 +21,14 @@ dependencies:
   '@stitches/react': 1.2.8_react@18.2.0
   '@tanstack/react-query': 4.10.3_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.11.0_vhepussragssjkevgznguhxexq
+  date-fns: 2.29.3
+  memory-cache: 0.2.0
   next: 12.3.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
 devDependencies:
+  '@types/memory-cache': 0.2.2
   '@types/node': 18.8.4
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
@@ -298,6 +304,10 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
+  /@types/memory-cache/0.2.2:
+    resolution: {integrity: sha512-xNnm6EkmYYhTnLiOHC2bdKgcYY5qjjrq5vl9KXD2nh0em0koZoFS500EL4Q4V/eW+A3P7NC7P7GIYzNOSQp7jQ==}
+    dev: true
+
   /@types/node/18.8.4:
     resolution: {integrity: sha512-WdlVphvfR/GJCLEMbNA8lJ0lhFNBj4SW3O+O5/cEGw9oYrv0al9zTwuQsq+myDUXgNx2jgBynoVgZ2MMJ6pbow==}
     dev: true
@@ -567,6 +577,11 @@ packages:
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
     dev: true
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -1378,6 +1393,10 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /memory-cache/0.2.0:
+    resolution: {integrity: sha512-OcjA+jzjOYzKmKS6IQVALHLVz+rNTMPoJvCztFaZxwG14wtAW7VRZjwTQu06vKCYOxh4jVnik7ya0SXTB0W+xA==}
+    dev: false
 
   /merge2/1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}

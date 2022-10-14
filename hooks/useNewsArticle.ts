@@ -6,8 +6,7 @@ const fetchNewsArticles = async () => {
   const response = await fetch(
     "https://www.alpha-orbital.com/last-100-news.json"
   );
-  const newsArticle = await response.json();
-  return newsArticle;
+  return await response.json();
 };
 
 interface params {

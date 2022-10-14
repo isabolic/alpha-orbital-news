@@ -12,7 +12,7 @@ const NavBar = styled("section", {
   top: "0px",
   width: "100%",
   backgroundColor: "black",
-  zIndex: 1,
+  zIndex: 2,
   padding: "1rem",
   justifyContent: "center",
 });

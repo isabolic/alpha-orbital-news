@@ -6,7 +6,6 @@ const Button = styled("button", {
   padding: "10px 15px",
   cursor: "pointer",
   border: "1px solid transparent",
-  borderRadius: "3px",
 });
 
 export { Button };

@@ -1,7 +1,8 @@
 import { css } from "@stitches/react";
 import { Button, Input } from "@toolkit";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { isSearchValid } from "./isSearchValid";
 
 const input = css({
   color: "black",
@@ -18,9 +19,7 @@ const box = css({
 });
 
 const searchBtn = css({
-  borderRadius: "0",
-  borderTopRightRadius: "3px",
-  borderBottomRightRadius: "3px",
+  borderRadius: "0px 3px 3px 0px",
 });
 
 interface NewsSearchBarProps {
@@ -29,25 +28,24 @@ interface NewsSearchBarProps {
 
 const NewsSearchBar = ({ value }: NewsSearchBarProps) => {
   const router = useRouter();
-  const [query, setQuery] = useState("");
+  const [search, setSearch] = useState("");
 
-  const onClick = () => {
-    router.push({ query: { ...router.query, query } });
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push({ query: { ...router.query, query: search } });
   };
 
-  useEffect(() => setQuery(value ?? ""), [value]);
+  // sync
+  useEffect(() => setSearch(value ?? ""), [value]);
 
-  const onChange = (e) => {
-    setQuery(e.target.value);
-  };
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSearch(e.target.value);
 
   return (
-    <div className={box()}>
-      <Input value={query} onChange={onChange} className={input()} />
-      <Button onClick={onClick} className={searchBtn()}>
-        Search
-      </Button>
-    </div>
+    <form onSubmit={submitHandler} className={box()}>
+      <Input value={search} onChange={onChange} className={input()} />
+      <Button className={searchBtn()}>Search</Button>
+    </form>
   );
 };
 

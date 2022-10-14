@@ -1,6 +1,7 @@
 import { useNewsArticle } from "@hooks";
 import { styled } from "@stitches/react";
 import { CategoryType } from "@utils";
+import { isSearchValid } from "./isSearchValid";
 import { NewsArticleCard } from "./NewsArticleCard";
 import { NewsSearchBar } from "./NewsSearchBar";
 
@@ -14,10 +15,12 @@ interface NewsArticleListProps {
 }
 
 const NewsArticleList = ({ categoryType, query }: NewsArticleListProps) => {
-  const { data, isLoading } = useNewsArticle({
+  const params = {
     categoryType,
-    query,
-  });
+    ...(isSearchValid(query ?? "") && { query }),
+  };
+
+  const { data, isLoading } = useNewsArticle(params);
 
   if (isLoading) return <div>Loading</div>;
 

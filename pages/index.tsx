@@ -1,23 +1,12 @@
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticProps } from "next";
 import React from "react";
-import { AppLayout, NewsArticleList } from "@components";
-import { fetchNewsArticles } from "../hooks";
-import { NewsArticle } from "../dto/NewsArticle";
+import { AppLayout, NewsArticleContainer } from "@components";
 import { NextPageWithLayout } from "./NextPageWithLayout";
 import { useRouter } from "next/router";
 import { CategoryType } from "@utils";
-
-export const getStaticProps: GetStaticProps = async () => {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery<NewsArticle[]>(["news"], fetchNewsArticles);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-};
+import { loadNewsArticles } from "@data";
+import { NewsArticle, NewsArticleData } from "@dto";
 
 const Main: NextPageWithLayout = () => {
   const router = useRouter();
@@ -25,10 +14,10 @@ const Main: NextPageWithLayout = () => {
 
   return (
     <>
-      <NewsArticleList
+      <NewsArticleContainer
         query={query as string | undefined}
         categoryType={filter as CategoryType | undefined}
-      ></NewsArticleList>
+      />
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { css } from "@stitches/react";
 import { Button, Input } from "@toolkit";
+import { Empty } from "@utils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -26,7 +27,7 @@ interface NewsSearchBarProps {
 
 const NewsSearchBar = ({ value }: NewsSearchBarProps) => {
   const router = useRouter();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<Empty<string>>("");
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

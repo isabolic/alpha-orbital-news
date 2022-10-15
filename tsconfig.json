@@ -15,13 +15,13 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@hooks": ["./hooks/index.ts"],
-      "@toolkit": ["./toolkit/index.ts"],
-      "@components": ["./components/index.ts"],
-      "@dto": ["./dto/index.ts"],
-      "@pages": ["./pages/index.ts"],
-      "@utils": ["./utils/index.ts"],
-      "@data": ["./data/index.ts"]
+      "@hooks": ["./src/hooks/index.ts"],
+      "@toolkit": ["./src/toolkit/index.ts"],
+      "@components": ["./src/components/index.ts"],
+      "@dto": ["./src/dto/index.ts"],
+      "@pages": ["./src/pages/index.ts"],
+      "@utils": ["./src/utils/index.ts"],
+      "@data": ["./src/data/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

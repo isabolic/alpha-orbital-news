@@ -1,7 +1,6 @@
 import { useNewsArticle } from "@hooks";
 import { css, styled } from "@stitches/react";
 import { CategoryType } from "@utils";
-import { useState } from "react";
 import { isSearchValid } from "./isSearchValid";
 import { NewsArticleList } from "./NewsArticleList";
 import { NewsSearchBar } from "./NewsSearchBar";

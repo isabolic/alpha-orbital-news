@@ -1,3 +1,4 @@
+import { CategoryType } from "@utils";
 import cache from "memory-cache";
 import { NewsArticle } from "../dto/NewsArticle";
 
@@ -23,7 +24,7 @@ const getNewsArticles = async () => {
   return cache.get(NEWS_ARTICLES);
 };
 
-const deleteNewsArticles = async (slug: string) => {
+const deleteNewsArticles = (slug: string) => {
   const data = cache.get(NEWS_ARTICLES) as NewsArticle[];
 
   cache.del(NEWS_ARTICLES);
@@ -33,9 +34,16 @@ const deleteNewsArticles = async (slug: string) => {
   );
 };
 
+const deleteNewsArticlesByCategory = (category: CategoryType) => {
+  const data = cache.get(NEWS_ARTICLES) as NewsArticle[];
+  const articles = data.filter((rec) => rec.post_category_id === category);
+  articles.forEach((x) => deleteNewsArticles(x));
+};
+
 export {
   loadNewsArticles,
   getNewsArticles,
   deleteNewsArticles,
   reloadNewsArticles,
+  deleteNewsArticlesByCategory,
 };

@@ -5,7 +5,8 @@ import {
 } from "@hooks";
 import { css } from "@stitches/react";
 import { Button, Select, Switch } from "@toolkit";
-import { CategoryType, getCategoyLabel } from "@utils";
+import { CategoryType, Empty, getCategoyLabel } from "@utils";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 interface NewsStatusBarProps {
@@ -20,9 +21,9 @@ const container = css({
   minHeight: "2rem",
 });
 
-const button = css({
+const itemStyle = css({
   marginLeft: "5px",
-  padding: "7px 5px",
+  $$padding: "7px 5px",
   borderRadius: "4px",
 });
 
@@ -51,9 +52,10 @@ const NewsStatusBar = ({
   numberOfArticles,
   showRefetch,
 }: NewsStatusBarProps) => {
+  const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const [selectedCategory, setSelectedCategory] =
-    useState<null | CategoryType>();
+    useState<Empty<CategoryType>>("");
 
   const { mutate } = useNewsArticleRefresh();
   const { mutate: mutateDeleteByCategory } = useDeleteNewsArticleByCategory();
@@ -64,7 +66,11 @@ const NewsStatusBar = ({
   };
 
   const deleteNewsArticleByCategoryHandler = () => {
-    mutateDeleteByCategory(selectedCategory!);
+    selectedCategory && mutateDeleteByCategory(selectedCategory);
+    if (selectedCategory === router.query.filter) {
+      router.push("/");
+    }
+    setSelectedCategory("");
   };
 
   const categoryList = data?.map((x) => ({
@@ -75,17 +81,21 @@ const NewsStatusBar = ({
   return (
     <div className={container()}>
       <div className={box()}>
-        <Switch onChange={setShowMenu} />
+        <Switch className={itemStyle()} onChange={setShowMenu} />
         <div className={showMenu ? fadeIn() : fadeOut()}>
           <div className={box()}>
             <div className={space()}>
               <Select<CategoryType>
+                className={itemStyle()}
                 onChange={setSelectedCategory}
+                value={selectedCategory}
                 list={categoryList ?? []}
+                empty
               />
             </div>
             <div className={space()}>
               <Button
+                className={itemStyle()}
                 disabled={!selectedCategory}
                 onClick={deleteNewsArticleByCategoryHandler}
               >
@@ -98,7 +108,7 @@ const NewsStatusBar = ({
       <div>
         Currently showing {numberOfArticles} articles
         {showRefetch && (
-          <Button className={button()} onClick={onRefetchHandler}>
+          <Button className={itemStyle()} onClick={onRefetchHandler}>
             Refetch
           </Button>
         )}

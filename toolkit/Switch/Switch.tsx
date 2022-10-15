@@ -4,7 +4,7 @@ const container = css({
   position: "relative",
   display: "inline-block",
   width: "60px",
-  height: "34px",
+  height: "30px",
 });
 
 const slider = css({
@@ -20,10 +20,10 @@ const slider = css({
   "&:before": {
     position: "absolute",
     content: "",
-    height: "26px",
-    width: "26px",
+    height: "24px",
+    width: "24px",
     left: "4px",
-    bottom: "4px",
+    bottom: "3px",
     backgroundColor: "white",
     transition: ".4s",
     borderRadius: "50%",
@@ -41,11 +41,12 @@ const input = css({
     boxShadow: "0 0 1px #2196F3",
   },
   "&:checked + span:before": {
-    transform: "translateX(26px)",
+    transform: "translateX(28px)",
   },
 });
 
 interface SwitchProps {
+  className?: string;
   onChange?: (toggle: boolean) => void;
 }
 

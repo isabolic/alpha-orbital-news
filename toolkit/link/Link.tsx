@@ -4,7 +4,8 @@ import { UrlObject } from "url";
 
 const Anchor = styled("a", {
   fontSize: "13px",
-  padding: "10px 15px",
+  $$padding: "10px 15px",
+  padding: "$$padding",
 });
 
 interface LinkProps {

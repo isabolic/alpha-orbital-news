@@ -1,68 +1,25 @@
-import { CategoryType } from "@utils";
+import { CategoryType, getCategoyLabel } from "@utils";
 import { Link } from "@toolkit";
 import { useRouter } from "next/router";
 
 interface LinkCategoryProps {
-  categoryType: string;
+  categoryType: CategoryType;
   className?: string;
 }
 
 const LinkCategory = ({ categoryType, className }: LinkCategoryProps) => {
-  let component = null;
   const router = useRouter();
 
-  switch (categoryType) {
-    case CategoryType.EVEOnline:
-      component = (
-        <Link
-          className={className}
-          text="EVE Online"
-          href={{
-            pathname: "/",
-            query: { ...router.query, filter: CategoryType.EVEOnline },
-          }}
-        />
-      );
-      break;
-    case CategoryType.XUniverse:
-      component = (
-        <Link
-          className={className}
-          text="X Universe"
-          href={{
-            pathname: "/",
-            query: { ...router.query, filter: CategoryType.XUniverse },
-          }}
-        />
-      );
-      break;
-    case CategoryType.StarpointGemini:
-      component = (
-        <Link
-          className={className}
-          text="Starpoint Gemini"
-          href={{
-            pathname: "/",
-            query: { ...router.query, filter: CategoryType.StarpointGemini },
-          }}
-        />
-      );
-      break;
-    case CategoryType.EliteDangerous:
-      component = (
-        <Link
-          className={className}
-          text="Elite: Dangerous"
-          href={{
-            pathname: "/",
-            query: { ...router.query, filter: CategoryType.EliteDangerous },
-          }}
-        />
-      );
-      break;
-  }
-
-  return component;
+  return (
+    <Link
+      className={className}
+      text={getCategoyLabel(categoryType)}
+      href={{
+        pathname: "/",
+        query: { ...router.query, filter: categoryType },
+      }}
+    />
+  );
 };
 
 export { LinkCategory };

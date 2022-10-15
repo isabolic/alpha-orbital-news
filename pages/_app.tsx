@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { AppPropsWithLayout } from "./AppPropsWithLayout";
+import { AppPropsWithLayout } from "@utils";
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const [queryClient] = React.useState(() => new QueryClient());

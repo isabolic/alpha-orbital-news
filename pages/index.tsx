@@ -1,12 +1,8 @@
-import { QueryClient, dehydrate } from "@tanstack/react-query";
-import type { GetStaticProps } from "next";
 import React from "react";
 import { AppLayout, NewsArticleContainer } from "@components";
-import { NextPageWithLayout } from "./NextPageWithLayout";
+import { NextPageWithLayout } from "@utils";
 import { useRouter } from "next/router";
 import { CategoryType } from "@utils";
-import { loadNewsArticles } from "@data";
-import { NewsArticle, NewsArticleData } from "@dto";
 
 const Main: NextPageWithLayout = () => {
   const router = useRouter();

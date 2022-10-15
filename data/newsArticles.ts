@@ -37,7 +37,7 @@ const deleteNewsArticles = (slug: string) => {
 const deleteNewsArticlesByCategory = (category: CategoryType) => {
   const data = cache.get(NEWS_ARTICLES) as NewsArticle[];
   const articles = data.filter((rec) => rec.post_category_id === category);
-  articles.forEach((x) => deleteNewsArticles(x));
+  articles.forEach((x) => deleteNewsArticles(x.slug));
 };
 
 export {

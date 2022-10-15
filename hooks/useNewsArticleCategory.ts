@@ -13,13 +13,13 @@ const getNewsCategories = (data: NewsArticle[]) => {
 };
 
 const useNewsArticleCategory = () => {
-  const { data, isLoading } = useNewsArticle();
+  const { data, isLoading, isFetching } = useNewsArticle();
 
   return useQuery<CategoryType[], Error>(
     ["newsCategories"],
     () => getNewsCategories(data?.articles!),
     {
-      enabled: !isLoading,
+      enabled: !(isLoading || isFetching),
     }
   );
 };

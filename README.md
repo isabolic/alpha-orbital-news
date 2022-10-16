@@ -24,8 +24,11 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Run the production server:
+## build & run the production server:
 
+```bash
+pnpm build
+```
 
 ```bash
 pnpm start
